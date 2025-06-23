@@ -96,7 +96,7 @@ This system is designed to be run using two separate WSL terminals.
    
 2.  **First-Time Setup:** Run this command only the first time you set up the project, or when you want to download new updates from Hummingbot. Otherwise run the commands in **Daily Workflow**   
     ```bash
-    bash setup.sh\n
+    bash setup.sh
     ```
 
     You should see something like this: 
