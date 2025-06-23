@@ -88,11 +88,9 @@ All of the following commands must be run inside the **WSL Terminal** (e.g., Ubu
 
 ## How to Run: Multi-Terminal Workflow
 
-This system is designed to be run using two separate terminals.
+This system is designed to be run using two separate WSL terminals.
 
-### **Terminal 1: Start Core Hummingbot Services**
-
-This terminal runs the main Hummingbot services in the background.
+### **Terminal 1: Start Core Hummingbot Services**  (main Hummingbot services)
 
 1.  **Navigate to the project directory** (e.g., `cd ~/hummingbot_batched_experiments`).
    
