@@ -94,16 +94,16 @@ This system is designed to be run using two separate WSL terminals.
 
 1.  **Navigate to the project directory** (e.g., `cd ~/hummingbot_batched_experiments`).
    
-2.  **First-Time Setup:** Run this command only the first time you set up the project, or when you want to download new updates from Hummingbot. Otherwise run the commands in **Daily Workflow** 
+2.  **First-Time Setup:** Run this command only the first time you set up the project, or when you want to download new updates from Hummingbot. Otherwise run the commands in **Daily Workflow** \n
     ```bash
-    bash setup.sh
+    bash setup.sh\n
     ```
 
-    You should see something like this:
+    You should see something like this: \n
     `
-###############:~/hummingbot_batched_experiments$ bash setup.sh
-[+] Pulling 9/111
-⠸ dashboard [⣿⣿⣿⣿⣿⣿⣿⣿] 386.9MB / 388.4MB Pulling
+###############:~/hummingbot_batched_experiments$ bash setup.sh`\n`
+[+] Pulling 9/111`\n`
+⠸ dashboard [⣿⣿⣿⣿⣿⣿⣿⣿] 386.9MB / 388.4MB Pulling`\n`
    `
     If nothing shows go to troubleshooting.
     
