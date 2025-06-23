@@ -95,15 +95,18 @@ This system is designed to be run using two separate terminals.
 This terminal runs the main Hummingbot services in the background.
 
 1.  **Navigate to the project directory** (e.g., `cd ~/hummingbot_batched_experiments`).
-2.  **First-Time Setup:** Run this command **only the first time** you set up the project, or when you want to download new updates from Hummingbot. It will take several minutes.
+   
+2.  **First-Time Setup:** Run this command only the first time you set up the project, or when you want to download new updates from Hummingbot. It will take several minutes.
     ```bash
     bash setup.sh
     ```
+    
 3.  **Verify Services are Running:** After the script finishes, check that everything is running correctly:
     ```bash
     docker ps
     ```
     You should see a list of running containers, including `deploy-backend-api-1` and `deploy-dashboard-1`.
+
 4.  **Access Services:** You can access the following services in your browser:
     -   **Main Dashboard UI:** `http://localhost:8501`
     -   **Backend API Docs:** `http://localhost:8000/docs`
