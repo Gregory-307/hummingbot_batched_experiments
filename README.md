@@ -157,9 +157,9 @@ The Experimentation framework is split into two 3 stages (and 3 easy commands):
   
 1.  Broad Model and Configuration Testing  
         - Command to run:
-          ```bash
-          python3 hummingbot_files/experiment_runner.py
-          ```  
+    ```bash
+    python3 hummingbot_files/experiment_runner.py
+    ```  
         - Many different experiments (different models/configurations) tested on 3 specific backtests  
         - Results will be recorded to `backtest_results.csv` - **This file is cumulative and will grow overtime.**  
         - **To edit your experiments:** Open the file `hummingbot_files/experiment_runner.py` in your code editor to define the batch of backtests you want to run.  
