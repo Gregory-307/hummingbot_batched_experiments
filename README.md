@@ -90,22 +90,22 @@ All of the following commands must be run inside the **WSL Terminal** (e.g., Ubu
 
 This system is designed to be run using two separate WSL terminals.
 
-### **Terminal 1: Start Core Hummingbot Services**  (main Hummingbot services)
+### **Terminal 1: Start Core Hummingbot Services**  (main Hummingbot services)  
 
-1.  **Navigate to the project directory** (e.g., `cd ~/hummingbot_batched_experiments`).
+1.  **Navigate to the project directory** (e.g., `cd ~/hummingbot_batched_experiments`).  
    
-2.  **First-Time Setup:** Run this command only the first time you set up the project, or when you want to download new updates from Hummingbot. Otherwise run the commands in **Daily Workflow** \n
+2.  **First-Time Setup:** Run this command only the first time you set up the project, or when you want to download new updates from Hummingbot. Otherwise run the commands in **Daily Workflow**   
     ```bash
     bash setup.sh\n
     ```
 
-    You should see something like this: \n
-    `
-###############:~/hummingbot_batched_experiments$ bash setup.sh`\n`
-[+] Pulling 9/111`\n`
-⠸ dashboard [⣿⣿⣿⣿⣿⣿⣿⣿] 386.9MB / 388.4MB Pulling`\n`
-   `
-    If nothing shows go to troubleshooting.
+    You should see something like this: 
+    ```
+    ###############:~/hummingbot_batched_experiments$ bash setup.sh
+    [+] Pulling 9/111
+    ⠸ dashboard [⣿⣿⣿⣿⣿⣿⣿⣿] 386.9MB / 388.4MB Pulling
+    ```
+    If nothing prints go to troubleshooting.  
     
 4.  **Verify Services are Running:** After the script finishes, check that everything is running correctly:
     ```bash
