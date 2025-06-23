@@ -95,30 +95,79 @@ This system is designed to be run using two separate terminals.
 This terminal runs the main Hummingbot services in the background.
 
 1.  **Navigate to the project directory** (e.g., `cd ~/hummingbot_batched_experiments`).
-2.  **Start Docker Services:** This command starts the main dashboard and the backend API using Docker. It will take several minutes on the first run.
+2.  **First-Time Setup:** Run this command **only the first time** you set up the project, or when you want to download new updates from Hummingbot. It will take several minutes.
     ```bash
     bash setup.sh
     ```
-3.  **Leave this terminal running.** You can access the following services in your browser:
+3.  **Verify Services are Running:** After the script finishes, check that everything is running correctly:
+    ```bash
+    docker ps
+    ```
+    You should see a list of running containers, including `deploy-backend-api-1` and `deploy-dashboard-1`.
+4.  **Access Services:** You can access the following services in your browser:
     -   **Main Dashboard UI:** `http://localhost:8501`
     -   **Backend API Docs:** `http://localhost:8000/docs`
+  
+### Troubleshooting: If `bash setup.sh` is stuck and shows no output**
+
+-   **Symptom:** You run `bash setup.sh` in your WSL terminal, but the screen is blank for more than a minute. You do not see any of the Docker download progress bars.
+-   **Cause:** This almost always means the connection between Docker Desktop and your WSL environment has failed or stalled.
+-   **Solution (The "Hard Reset"):**
+    1.  Close all open WSL terminals.
+    2.  Quit Docker Desktop from the Windows system tray (right-click the whale icon -> "Quit Docker Desktop").
+    3.  Open **Windows PowerShell** (not WSL/Ubuntu).
+    4.  In PowerShell, run this command to force a full shutdown of the WSL service:
+        ```
+        wsl --shutdown
+        ```
+    5.  Restart the **Docker Desktop** application. Wait for it to fully initialize (the engine status in the bottom-left should be green).
+    6.  Open a new WSL terminal and navigate back to your project directory to try steps 1 and 2 again.
+
+
+#### **Daily Workflow**
+
+After you have completed the first-time setup, **you do not need to run `bash setup.sh` again**. Use these commands to start and stop the services.
+
+-   **To START the services:**
+    ```bash
+    # From your project directory, e.g., ~/hummingbot_batched_experiments
+    docker compose up -d
+    ```
+-   **To STOP the services:**
+    ```bash
+    # From your project directory
+    docker compose down
+    ```
+    
 
 ### **Terminal 2: Run Experiments & Analyze Results**
 
-This terminal is your workspace for the custom experimentation framework.
+**Navigate to the project directory** in a new terminal window. This terminal is your workspace for the custom experimentation framework. 
 
-1.  **Navigate to the project directory** in a new terminal window.
-2.  **(Optional) Edit Your Experiments:** Open the file `hummingbot_files/experiment_runner.py` in your code editor to define the batch of backtests you want to run.
-3.  **Execute the Experiment Runner:**
-    ```bash
-    python3 hummingbot_files/experiment_runner.py
-    ```
-    This will run all your defined experiments and generate a `backtest_results.csv` file in the `hummingbot_files/results/` directory.
-4.  **Analyze Experiment Results:** Once the runner is finished, start the custom analysis dashboard.
+The Experimentation framework is split into two 3 stages (and 3 easy commands):
+
+1.  Broad Model and Configuration Testing
+        - Many different experiments (different models/configurations) tested on 3 specific backtests
+        - ```bash
+            python3 hummingbot_files/experiment_runner.py
+           ```
+        - Results will be recorded to `backtest_results.csv` - **This file is cumulative and will grow overtime.**
+        - **To edit your experiments:** Open the file `hummingbot_files/experiment_runner.py` in your code editor to define the batch of backtests you want to run.
+*Every experiment has a unique hash. If two experiments are the same, they will also have the same hash. `experiment_runner.py` will skip experiments with an existing hash in `backtest_results.csv` to save time.*
+        
+3.  Deep Analysis
+        - ```bash
+            python3 hummingbot_files/deep_analysis.py
+           ```
+        - The top 5 models (by PnL as default) will be tested over many different ranges and timeframe configurations.
+        - Results will be recorded to `top_model_results.csv`  **Warning this file is not cumulative and will be overwritten**
+    
+5.  **Analyze Experiment Results:** Once the experiments are finished, start the custom analysis dashboard.
     ```bash
     streamlit run hummingbot_files/dashboard.py
     ```
     Check the terminal output for the exact URL. It will typically be on the next available port, such as **`http://localhost:8502`**.
+
 
 ---
 
