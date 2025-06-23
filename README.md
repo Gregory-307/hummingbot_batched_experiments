@@ -94,18 +94,26 @@ This system is designed to be run using two separate WSL terminals.
 
 1.  **Navigate to the project directory** (e.g., `cd ~/hummingbot_batched_experiments`).
    
-2.  **First-Time Setup:** Run this command only the first time you set up the project, or when you want to download new updates from Hummingbot. It will take several minutes.
+2.  **First-Time Setup:** Run this command only the first time you set up the project, or when you want to download new updates from Hummingbot. Otherwise run the commands in **Daily Workflow** 
     ```bash
     bash setup.sh
     ```
+
+    You should see something like this:
+    `
+###############:~/hummingbot_batched_experiments$ bash setup.sh
+[+] Pulling 9/111
+⠸ dashboard [⣿⣿⣿⣿⣿⣿⣿⣿] 386.9MB / 388.4MB Pulling
+   `
+    If nothing shows go to troubleshooting.
     
-3.  **Verify Services are Running:** After the script finishes, check that everything is running correctly:
+4.  **Verify Services are Running:** After the script finishes, check that everything is running correctly:
     ```bash
     docker ps
     ```
     You should see a list of running containers, including `deploy-backend-api-1` and `deploy-dashboard-1`.
 
-4.  **Access Services:** You can access the following services in your browser:
+5.  **Access Services:** You can access the following services in your browser:
     -   **Main Dashboard UI:** `http://localhost:8501`
     -   **Backend API Docs:** `http://localhost:8000/docs`
   
