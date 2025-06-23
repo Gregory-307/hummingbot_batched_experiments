@@ -111,7 +111,7 @@ This system is designed to be run using two separate WSL terminals.
     ```bash
     docker ps
     ```
-    You should see a list of running containers, including `deploy-backend-api-1` and `deploy-dashboard-1`.
+    You should see a list of running containers, including `backend-api`, `dashboard`, and `hummingbot-broker`.
 
 5.  **Access Services:** You can access the following services in your browser:
     -   **Main Dashboard UI:** `http://localhost:8501`
