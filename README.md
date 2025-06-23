@@ -42,7 +42,7 @@ All of the following commands must be run inside the **WSL Terminal** (e.g., Ubu
     # Go to your WSL home directory
     cd ~
     # Clone this specific repository
-    git clone [https://github.com/Gregory-307/hummingbot_batched_experiments.git](https://github.com/Gregory-307/hummingbot_batched_experiments.git)
+    git clone https://github.com/Gregory-307/hummingbot_batched_experiments.git
     # Navigate into the newly cloned project folder
     cd hummingbot_batched_experiments
     ```
@@ -59,7 +59,7 @@ All of the following commands must be run inside the **WSL Terminal** (e.g., Ubu
 -   **Docker Desktop for Mac:** The application must be running. You can download it from [Docker's official site](https://www.docker.com/products/docker-desktop).
 -   **Homebrew:** A package manager for macOS. If you don't have it, open Terminal and run:
     ```bash
-    /bin/bash -c "$(curl -fsSL [https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh](https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh))"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     ```
 -   **Python 3:** Install using Homebrew.
     ```bash
@@ -73,7 +73,7 @@ All of the following commands must be run inside the **WSL Terminal** (e.g., Ubu
     # Go to your home directory
     cd ~
     # Clone this specific repository
-    git clone [https://github.com/Gregory-307/hummingbot_batched_experiments.git](https://github.com/Gregory-307/hummingbot_batched_experiments.git)
+    git clone https://github.com/Gregory-307/hummingbot_batched_experiments.git
     # Navigate into the newly cloned project folder
     cd hummingbot_batched_experiments
     ```
