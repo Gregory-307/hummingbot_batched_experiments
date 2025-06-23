@@ -1,123 +1,132 @@
-# hummingbot-deploy
+# Hummingbot Deploy with Custom Experimentation Framework
 
-Welcome to the Hummingbot Deploy project. This guide will walk you through the steps to deploy multiple trading bots using a centralized dashboard and a service backend.
+This repository is a fork of the standard `hummingbot/deploy` project, enhanced with a custom framework for running and analyzing backtesting experiments in batches.
 
-## Prerequisites
+## Overview
 
-- Docker must be installed on your machine. If you do not have Docker installed, you can download and install it from [Docker's official site](https://www.docker.com/products/docker-desktop).
-- If you are on Windows, you'll need to setup WSL2 and a Linux terminal like Ubuntu. Make sure to run the commands below in a Linux terminal and not in the Windows command prompt or Powershell.
+This system provides two powerful, parallel workflows:
 
-## Installation
+1.  **Hummingbot Deploy Core:** The standard system for deploying and managing live Hummingbot instances via a graphical web UI.
+2.  **Custom Experimentation Framework:** A suite of local Python scripts designed for rapid, code-based development. It allows you to define, run, and analyze batches of backtests against your own custom strategies without ever touching the UI. It includes a dedicated Streamlit dashboard for visualizing experiment results.
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/hummingbot/deploy.git
-   cd deploy
-   ```
+The primary goal of this fork is to accelerate the strategy ideation and evaluation cycle.
 
-## Running the Application
+---
 
-1. **Start and configure the Application**
-   - Run the following command to download and start the app.
-   - ```bash
-     bash setup.sh
-     ```
-2. **Access the dashboard:**
-   - Open your web browser and go to `localhost:8501`. Replace `localhost` with the IP of your server if using a cloud server.
+## Setup Instructions
 
-3. **API Keys and Credentials:**
-   - Go to the credentials page
-   - You add credentials to the master account by picking the exchange and adding the API key and secret. This will encrypt the keys and store them in the master account folder.
-   - If you are managing multiple accounts you can create a new one and start adding new credentials there.
+Please follow the instructions for your operating system.
 
-4. **Create a config for PMM Simple**
-   - Go to the tab PMM Simple and create a new configuration. Soon will be released a video explaining how the strategy works.
+### **Windows Setup (Tested)**
 
-5. **Deploy the configuration**
-   - Go to the Deploy tab, select a name for your bot, the image hummingbot/hummingbot:latest and the configuration you just created.
-   - Press the button to create a new instance.
+#### **Step 1: Install Prerequisites**
+Before you begin, ensure you have the following installed and running on your Windows machine:
 
-6. **Check the status of the bot**
-   - Go to the Instances tab and check the status of the bot.
-     - If it's not available is because the bot is starting, wait a few seconds and refresh the page.
-     - If it's running, you can check the performance of it in the graph, refresh to see the latest data.
-     - If it's stopped, probably the bot had an error, you can check the logs in the container to understand what happened.
+-   **Docker Desktop:** The application must be running. You can download it from [Docker's official site](https://www.docker.com/products/docker-desktop).
+-   **WSL2 (Windows Subsystem for Linux):** You must have a Linux distribution like **Ubuntu** installed from the Microsoft Store.
+-   **Enable WSL Integration:** In your Docker Desktop settings, you must enable WSL Integration for your chosen distro.
+    -   *Navigate to: Settings -> Resources -> WSL Integration.*
+    -   *Turn the toggle **ON** for your distro (e.g., Ubuntu).*
 
-7. **[Optional] Check the Backend API**
-   -  Open your web browser and go to `localhost:8000/docs`.
+#### **Step 2: Clone & Install**
+All of the following commands must be run inside the **WSL Terminal** (e.g., Ubuntu), not Windows Command Prompt or PowerShell.
 
-## Authentication
+1.  **Open your WSL Terminal.**
+2.  **Install Python:** Your WSL environment needs its own copy of Python 3 and its package installer, `pip`.
+    ```bash
+    sudo apt update
+    sudo apt install python3-pip -y
+    ```
+3.  **Clone the Repository:**
+    ```bash
+    # Go to your WSL home directory
+    cd ~
+    # Clone this specific repository
+    git clone [https://github.com/Gregory-307/hummingbot_batched_experiments.git](https://github.com/Gregory-307/hummingbot_batched_experiments.git)
+    # Navigate into the newly cloned project folder
+    cd hummingbot_batched_experiments
+    ```
+4.  **Install Python Dependencies:**
+    ```bash
+    python3 -m pip install requests pandas streamlit ruamel.yaml
+    ```
+5.  **Place Your Custom Strategies:** Your custom `.py` strategy files should be placed in the following directory:
+    `hummingbot_files/strategies/`
 
-Authentication is disabled by default. To enable Dashboard Authentication please follow the steps below: 
+### **macOS Setup (Untested)**
 
-**Set Credentials (Optional):**
+#### **Step 1: Install Prerequisites**
+-   **Docker Desktop for Mac:** The application must be running. You can download it from [Docker's official site](https://www.docker.com/products/docker-desktop).
+-   **Homebrew:** A package manager for macOS. If you don't have it, open Terminal and run:
+    ```bash
+    /bin/bash -c "$(curl -fsSL [https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh](https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh))"
+    ```
+-   **Python 3:** Install using Homebrew.
+    ```bash
+    brew install python3
+    ```
 
-The dashboard uses `admin` and `abc` as the default username and password respectively. It's strongly recommended to change these credentials for enhanced security.:
+#### **Step 2: Clone & Install**
+1.  **Open the standard Terminal app.**
+2.  **Clone the Repository:**
+    ```bash
+    # Go to your home directory
+    cd ~
+    # Clone this specific repository
+    git clone [https://github.com/Gregory-307/hummingbot_batched_experiments.git](https://github.com/Gregory-307/hummingbot_batched_experiments.git)
+    # Navigate into the newly cloned project folder
+    cd hummingbot_batched_experiments
+    ```
+3.  **Install Python Dependencies:**
+    ```bash
+    python3 -m pip install requests pandas streamlit ruamel.yaml
+    ```
+4.  **Place Your Custom Strategies:** Your custom `.py` strategy files should be placed in the following directory:
+    `hummingbot_files/strategies/custom/`
 
-- Navigate to the `deploy` folder and open the `credentials.yml` file.
-- Add or modify the current username / password and save the changes afterward
-  
-  ```
-  credentials:
-    usernames:
-      admin:
-        email: admin@gmail.com
-        name: John Doe
-        logged_in: False
-        password: abc
-  cookie:
-    expiry_days: 0
-    key: some_signature_key # Must be string
-    name: some_cookie_name
-  pre-authorized:
-    emails:
-    - admin@admin.com
-  ```  
-### Enable Authentication
+---
 
-- Ensure the dashboard container is not running.
-- Open the `docker-compose.yml` file within the `deploy` folder using a text editor.
-- Locate the environment variable `AUTH_SYSTEM_ENABLED` under the dashboard service configuration.
-  
-  ```
-  services:
-  dashboard:
-    container_name: dashboard
-    image: hummingbot/dashboard:latest
-    ports:
-      - "8501:8501"
-    environment:
-        - AUTH_SYSTEM_ENABLED=True
-        - BACKEND_API_HOST=backend-api
-        - BACKEND_API_PORT=8000
-  ```
-- Change the value of `AUTH_SYSTEM_ENABLED` from `False` to `True`.
-- Save the changes to the `docker-compose.yml` file.
-- Relaunch Dashboard by running `bash setup.sh`
-  
-### Known Issues
-- Refreshing the browser window may log you out and display the login screen again. This is a known issue that might be addressed in future updates.
+## How to Run: Multi-Terminal Workflow
 
+This system is designed to be run using two separate terminals.
 
-## Dashboard Functionalities
+### **Terminal 1: Start Core Hummingbot Services**
 
-- **Config Generator:**
-  - Create and select configurations for different v2 strategies.
-  - Backtest and deploy the selected configurations.
+This terminal runs the main Hummingbot services in the background.
 
-- **Bot Management:**
-  - Visualize bot performance in real-time.
-  - Stop and archive running bots.
+1.  **Navigate to the project directory** (e.g., `cd ~/hummingbot_batched_experiments`).
+2.  **Start Docker Services:** This command starts the main dashboard and the backend API using Docker. It will take several minutes on the first run.
+    ```bash
+    bash setup.sh
+    ```
+3.  **Leave this terminal running.** You can access the following services in your browser:
+    -   **Main Dashboard UI:** `http://localhost:8501`
+    -   **Backend API Docs:** `http://localhost:8000/docs`
 
-## Tutorial
+### **Terminal 2: Run Experiments & Analyze Results**
 
-To get started with deploying your first bot, follow these step-by-step instructions:
+This terminal is your workspace for the custom experimentation framework.
 
-1. **Prepare your bot configurations:**
-   - Select a controller and backtest your controller configs.
+1.  **Navigate to the project directory** in a new terminal window.
+2.  **(Optional) Edit Your Experiments:** Open the file `hummingbot_files/experiment_runner.py` in your code editor to define the batch of backtests you want to run.
+3.  **Execute the Experiment Runner:**
+    ```bash
+    python3 hummingbot_files/experiment_runner.py
+    ```
+    This will run all your defined experiments and generate a `backtest_results.csv` file in the `hummingbot_files/results/` directory.
+4.  **Analyze Experiment Results:** Once the runner is finished, start the custom analysis dashboard.
+    ```bash
+    streamlit run hummingbot_files/dashboard.py
+    ```
+    Check the terminal output for the exact URL. It will typically be on the next available port, such as **`http://localhost:8502`**.
 
-2. **Deploy a bot:**
-   - Use the dashboard UI to select and deploy your configurations.
+---
 
-3. **Monitor and Manage:**
-   - Track bot performance and make adjustments as needed through the dashboard.
+## Key Directory Structure
+
+-   `docker-compose.yml`: The blueprint that defines all the core services and their configurations.
+-   `hummingbot_files/`: **This is your primary workspace for custom development.**
+    -   `strategies/custom/`: Your custom strategy files live here.
+    -   `experiment_runner.py`: The script that orchestrates the backtesting experiments. **This is the main file to edit.**
+    -   `dashboard.py`: The Streamlit dashboard script for visualizing results.
+    -   `results/`: Default location for the `backtest_results.csv` output.
