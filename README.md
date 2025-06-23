@@ -117,7 +117,7 @@ This system is designed to be run using two separate WSL terminals.
     -   **Main Dashboard UI:** `http://localhost:8501`
     -   **Backend API Docs:** `http://localhost:8000/docs`
   
-### Troubleshooting: If `bash setup.sh` is stuck and shows no output**
+### Troubleshooting: If `bash setup.sh` is stuck and shows no output
 
 -   **Symptom:** You run `bash setup.sh` in your WSL terminal, but the screen is blank for more than a minute. You do not see any of the Docker download progress bars.
 -   **Cause:** This almost always means the connection between Docker Desktop and your WSL environment has failed or stalled.
